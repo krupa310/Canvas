@@ -1,0 +1,71 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Canvas bubbles</title>
+    <style>
+        body {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mycanvas"></canvas>
+    <script type="text/javascript">
+        var canvas;
+        var ctx;
+        var x = 400;
+        var y = 300;
+        var dx = 4;
+        var dy = 5;
+        var t = 10;//time interval
+        var count = 0;
+        var radius = 10;
+
+        //var WIDTH = document.width;//canvas width
+        //var HEIGHT = document.height;
+
+        var WIDTH = window.innerWidth;//canvas width
+        var HEIGHT = window.innerHeight;//canvas height
+
+        var colors = ['#B2949D', '#FFF578', '#FF5F8D', '#37A9CC', '#188EB2'];
+
+        function circle(x, y, r) {
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2, true);// Math.PI * 2 for full circle
+            ctx.fill();//filling circle by color           
+        }
+
+        function clear() {
+            ctx.clearRect(0, 0, WIDTH, HEIGHT);
+        }
+
+        function init() {
+            canvas = document.getElementById("mycanvas");
+            canvas.width = WIDTH;
+            canvas.height = HEIGHT;
+            ctx = canvas.getContext("2d");
+            return setInterval(draw, t);
+        }
+
+
+        function draw() {
+            clear();//for clearing path            
+            ctx.fillStyle = 'blue';
+            circle(x, y, radius);          
+
+            if (x + dx > WIDTH || x + dx < 0)
+                dx = -dx;
+            if (y + dy > HEIGHT || y + dy < 0)
+                dy = -dy;
+            //circle(x, y, t);
+            x += dx;
+            y += dy;
+        }
+
+        init();
+    </script>
+
+</body>
+
+</html>
